@@ -51,6 +51,19 @@ Obs: If you run into errors just use the code npm i next-sanity@latest --legacy-
 
 And there you will be able to create values for fetching later on
 
+3rd step - TypeGen -> https://www.sanity.io/docs/sanity-typegen 
+
+First install Sanity CLI globally: npm install -g @sanity/cli 
+If you already have this installed, just ignore this step.
+
+Then we go to the studio folder and use the command: "sanity schema extract", this will create a schema.json file
+
+After the creation of the schema.json file we use the command: "sanity typegen generate"
+
+And then we will create a script called "typegen" and add the following: "npx sanity@latest schema extract && npx sanity@latest typegen generate"
+
+So that every time I change my schema I can run npm run typegen and it will execute the 2 commands and if we change our schema or run any GROQ queries we can run the typegen and it will create the schemas and types already updated.
+
 ## Clerk
 
 Installation:
