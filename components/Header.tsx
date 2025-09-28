@@ -11,19 +11,9 @@ import Link from "next/link";
 import Form from "next/form";
 import React from "react";
 import { TrolleyIcon, PackageIcon, SearchIcon } from "@sanity/icons";
-import KeyIcon from "@/app/assets/icons/Key";
 
 export default function Header() {
   const { user } = useUser();
-
-  const createClerkPasskey = async () => {
-    try {
-      const response = await user?.createPasskey();
-      console.log(response);
-    } catch (err) {
-      console.log("Error: ", JSON.stringify(err, null, 2));
-    }
-  };
 
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
@@ -75,17 +65,6 @@ export default function Header() {
               </div>
             ) : (
               <SignInButton mode="modal" />
-            )}
-
-            {user?.passkeys.length === 0 && (
-              <button
-                type="button"
-                onClick={createClerkPasskey}
-                className="bg-white hover:bg-violet-500 transition-colors duration-150 flex gap-1.5 hover:text-white text-violet-500 py-2 px-4 rounded border border-violet-300"
-              >
-                <KeyIcon width={20} height={20} />
-                <span>Create Passkey</span>
-              </button>
             )}
           </ClerkLoaded>
         </div>
