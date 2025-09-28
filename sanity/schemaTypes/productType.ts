@@ -59,12 +59,12 @@ export const productType = defineType({
     select: {
       title: "name",
       media: "image",
-      subtitle: "price",
+      price: "price",
     },
     prepare(select) {
       return {
         title: select.title,
-        subtitle: `$${select.subtitle}`,
+        subtitle: `$${select.price}`,
         media: select.media,
       };
     },

@@ -13,7 +13,6 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Cyber Shopr</h1>
       <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-4">
         <ProductsView products={products} categories={categories} />
       </div>

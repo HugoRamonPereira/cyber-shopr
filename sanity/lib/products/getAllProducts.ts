@@ -7,11 +7,13 @@ export const getAllProducts = async () => {
   `);
 
   try {
-    const products = sanityFetch({
+    // const products = sanityFetch({
+    const products = await sanityFetch({
       query: ALL_PRODUCTS_QUERY,
     });
 
-    return (await products).data || [];
+    // return (await products).data || [];
+    return products.data || [];
   } catch (error) {
     console.error("Error fetching all products", error);
     return [];

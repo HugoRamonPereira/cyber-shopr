@@ -25,7 +25,6 @@ export default function Header() {
     }
   };
 
-  console.log(user);
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
       <div className="flex w-full max-w-[100rem] flex-wrap justify-between items-center mx-auto">

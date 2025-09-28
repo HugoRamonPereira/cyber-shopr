@@ -36,6 +36,8 @@ export default function RootLayout({
             <Header />
             {children}
           </main>
+          {/* This component will make the Live functionality work, when we edit a value, title, 
+          or sth on Sanity Studio it will show on our Frontend in real time. */}
           <SanityLive />
         </body>
       </html>

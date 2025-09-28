@@ -7,11 +7,13 @@ export const getAllCategories = async () => {
   `);
 
   try {
-    const categories = sanityFetch({
+    // const categories = sanityFetch({
+    const categories = await sanityFetch({
       query: ALL_CATEGORIES_QUERY,
     });
 
-    return (await categories).data || [];
+    // return (await categories).data || [];
+    return categories.data || [];
   } catch (error) {
     console.error("Error fetching all categories", error);
     return [];
