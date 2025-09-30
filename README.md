@@ -119,3 +119,9 @@ And now we suggest you follow another documentation: https://clerk.com/changelog
 Because we have to add the dynamic prop to ClerkProvider.
 
 And we go to the layout file and wrap it with our provider and pass the dynamic prop
+
+## Zustand - State Management App
+
+Used Zustand so that we can access global state in a short and easy way.
+
+The cart items can be added and it will show in real time the updates in the header component where we have the cart button.

@@ -11,9 +11,13 @@ import Link from "next/link";
 import Form from "next/form";
 import React from "react";
 import { TrolleyIcon, PackageIcon, SearchIcon } from "@sanity/icons";
+import useCartStore from "@/store/store";
 
 export default function Header() {
   const { user } = useUser();
+  const itemCount = useCartStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0)
+  );
 
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
@@ -42,6 +46,10 @@ export default function Header() {
             className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center gap-1 bg-violet-500 hover:bg-violet-500/85 transition-colors duration-150 text-white py-2 px-4 rounded"
           >
             <TrolleyIcon className="w-6 h-6 mb-0.5" />
+            {/* Span item count since it is used in our global store */}
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              {itemCount}
+            </span>
             <span>My Cart</span>
           </Link>
           <ClerkLoaded>
