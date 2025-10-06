@@ -1,6 +1,9 @@
 "use client";
 
-import { Metadata } from "@/actions/createCheckoutSession";
+import {
+  createCheckoutSession,
+  Metadata,
+} from "@/actions/createCheckoutSession";
 import AddToCartButton from "@/components/AddToCartButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
@@ -40,24 +43,24 @@ function CartPage() {
     if (!isSignedIn) return;
     setIsLoading(true);
 
-    // try {
-    //   const metadata: Metadata = {
-    //     orderNumber: crypto.randomUUID(),
-    //     customerName: user?.fullName ?? "Unknown",
-    //     customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
-    //     clerkUserId: user!.id,
-    //   };
+    try {
+      const metadata: Metadata = {
+        orderNumber: crypto.randomUUID(),
+        customerName: user?.fullName ?? "Unknown",
+        customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+        clerkUserId: user!.id,
+      };
 
-    //   const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+      const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
 
-    //   if (checkoutUrl) {
-    //     window.location.href = checkoutUrl;
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
