@@ -7,6 +7,7 @@ import {
 import AddToCartButton from "@/components/AddToCartButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
+import { formatPrice } from "@/lib/priceFormatter";
 import useCartStore from "@/store/store";
 import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
@@ -27,7 +28,7 @@ function CartPage() {
   }, []);
 
   if (!isClient) {
-    return <Loader />;
+    return <Loader size="xl" />;
   }
 
   if (groupedItems.length === 0) {
@@ -96,8 +97,9 @@ function CartPage() {
                     {item.product.name}
                   </h2>
                   <p className="text-sm sm:text-base">
-                    Price: £{" "}
-                    {((item.product.price ?? 0) * item.quantity).toFixed(2)}
+                    Price:{" "}
+                    {/* {((item.product.price ?? 0) * item.quantity).toFixed(2)} */}
+                    {formatPrice((item.product.price ?? 0) * item.quantity)}
                   </p>
                 </div>
               </div>
@@ -110,7 +112,7 @@ function CartPage() {
         {/* Order Summary */}
         <div className="w-full lg:w-80 lg:sticky lg:top-4 h-fit bg-white p-6 border rounded oder-first lg:order-last fixed bottom-0 left-0 lg:left-auto">
           <h3 className="text-xl lg:text-2xl font-semibold">Order Summary</h3>
-          <div className="mt-4 space-y-4">
+          <div className="my-5 space-y-4">
             <p className="flex justify-between">
               <span>Items:</span>
               <span>
@@ -119,28 +121,34 @@ function CartPage() {
             </p>
             <p className="flex justify-between text-2xl font-bold border-t pt-4">
               <span>Total:</span>
-              <span>£{useCartStore.getState().getTotalPrice().toFixed(2)}</span>
+              <span>
+                {formatPrice(useCartStore.getState().getTotalPrice())}
+              </span>
             </p>
           </div>
 
           {isSignedIn ? (
             <button
-              className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+              className="mt-10 w-full bg-violet-500 text-white px-4 py-2.5 rounded hover:bg-violet-500/85 transition-colors duration-150 disabled:bg-violet-100 disabled:border disabled:border-violet-500 font-medium text-lg disabled:cursor-not-allowed flex items-center justify-center"
               onClick={handleCheckout}
               disabled={isLoading}
             >
-              {isLoading ? "Processing..." : "Checkout"}
+              {isLoading ? (
+                <p className="text-violet-500">Processing...</p>
+              ) : (
+                "Proceed to Checkout"
+              )}
             </button>
           ) : (
             <SignInButton mode="modal">
-              <button className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              <button className="mt-4 w-full bg-violet-500 text-white px-4 py-4 rounded hover:bg-violet-500/85 transition-colors duration-150 font-medium text-lg min-h-[60px]">
                 Sign in to Checkout
               </button>
             </SignInButton>
           )}
         </div>
 
-        <div className="h-64 lg:h-0">
+        <div className="h-64 lg:h-0 bg-fu">
           {/* Spacer for mobile cases where we might have too many products in the cart page we need to have some room for the Order Summary to be still visible and the user be able to scroll */}
         </div>
       </div>
