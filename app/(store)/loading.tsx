@@ -1,7 +1,7 @@
 import Loader from "@/components/Loader";
 
 function Loading() {
-  return <Loader />;
+  return <Loader size="xl" />;
 }
 
 export default Loading;
